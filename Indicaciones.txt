@@ -1,0 +1,23 @@
+# Ejecutar en PowerShell, dentro de la carpeta machine-learning-Bot-telegram
+
+# 1. Crear y activar un entorno virtual (solo la primera vez)
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+#    Si PowerShell bloquea el script:  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+# 2. Instalar PyTorch (versión CPU, más liviana)
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# 3. Instalar el resto (incluye pysentimiento y python-telegram-bot)
+pip install -r requirements.txt
+
+# 4. Configurar el token (solo la primera vez)
+#    Copia .env.example como .env y pega tu token de @BotFather:
+copy .env.example .env
+notepad .env
+
+# 5. Ejecutar el bot
+python bot.py
+#    La primera ejecución descarga los modelos (~1 GB), tarda unos minutos.
+
+# En Telegram: /start, envía mensajes para analizar, y /resumen para ver el balance.
